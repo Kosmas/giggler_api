@@ -103,6 +103,40 @@ You must provide the `Authorization: Bearer {access_token}` header in all other 
                 }
             ]
 
+### Create a new child report [POST]
+
+Adds a new report.
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer {access_token}
+    + Attributes (Report)
+            
++ Response 201 (application/json)
+    
+    Report created.
+    
+    + Attributes (Report)
+
+#### Report [/reports/{reportid}]
+
+Resource representing one child report.
+
++ Parameters
+    + reportid (number, required) - ID for the report
+
++ Attributes
+    + id: 1 (number, required) - ID of the report
+    + children_id: 4 (number, required) - ID of the child
+    + user_id: 3 (number, required) - ID of the staff
+    + day: 20160226 (string, required) - Day of report
+    + mood: Happy (string) - Child mood
+    + food: {Morning => 1 Banana, Lunch => 2 portions} (object) - Daily food
+    + sleep: 11.30-12.30, 14:00 - 14:30 (array) - Sleep times
+    + nappy: 3 nappies, 2 poos (array) - Nappy changes
+    + notes: Some notes (string) - General notes
+
 ## Posts [/api/v1.0/posts/{id}]
 
 + Parameters
