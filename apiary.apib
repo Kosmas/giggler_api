@@ -1,80 +1,453 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: http://giggles.ch
 
-# giggler
+# Childcare API
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+Childcare application API calls.
 
-## Questions Collection [/questions]
+## Sign In [/api/v1.0/sign_in/{email}{password}]
 
-### List All Questions [GET]
+### Sign in [POST]
+Performs the login (Based on the documentation here: https://github.com/timdorr/model-s-api/blob/master/apiary.apib)
+
+Returns an `access_token` which is passed along as a header with all future requests to authenticate the user.
+
+You must provide the `Authorization: Bearer {access_token}` header in all other requests.
+
++ Parameters
+    + email: 'test@test.com' (string) - User email
+    + password: 'pass' (string) - User password
+    
 
 + Response 200 (application/json)
-
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
-
-### Create a New Question [POST]
-
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
-
-+ Request (application/json)
-
-        {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
-        }
-
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /questions/2
-
     + Body
 
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
+              "access_token": "abc123",
+              "token_type": "bearer",
+              "expires_in": 7776000
             }
+
+## Sign out [/api/v1.0/sign_out]
+
+### Sign out [DELETE]
+
++ Request
+    + Headers
+
+            Authorization: Bearer {access_token}
+
+
++ Response 204
+
+## My Day [/api/v1.0/my_day/{id}]
+
++ Parameters
+
+    + id: `1` (number) - The id of the Child.
+
+### List child report [GET]
+
++ Request
+    + Headers
+
+            Authorization: Bearer {access_token}
+
+
++ Response 200 (application/json)
+    
+    + Body
+
+            [
+                {
+                    "message": {
+                        "id": "1",
+                        "description": "Hi Dad, ...."
+                    },
+                    "food": [
+                        { "morning": {
+                            "id": "1",
+                            "description": "Banana",
+                            "portions": "2"
+                        },
+                        "lunch": {
+                            "id": "5",
+                            "description": "Beef Stew",
+                            "portions": "1"
+                        },
+                        "afternoon": {
+                            "id": "6",
+                            "description": "Apples",
+                            "portions": "1"
+                        }
+                        }
+                    ],
+                    "sleep": [
+                        {
+                            "id": "2",
+                            "start": "10:00",
+                            "end": "11:00"
+                        },
+                        {
+                            "id": "3",
+                            "start": "14:00",
+                            "end": "15:00"
+                        }
+                    ],
+                    "nappy": {
+                        "id": "4",
+                        "nappie_count": "4",
+                        "poo_count": "2"
+                        }
+                    }
+                }
+            ]
+
+## Posts [/api/v1.0/posts/{id}]
+
++ Parameters
+
+    + id: `1` (number) - The id of the Child.
+
+### List all posts for child [GET]
+
++ Request
+    + Headers
+
+            Authorization: Bearer {access_token}
+
+
++ Response 200 (application/json)
+    
+    + Body
+
+            [
+                {
+                    "id": "5",
+                    "created_at": "2015-08-05T08:40:51.620Z",
+                    "created_by": {
+                        "id": "10",
+                        "name": "Caretaker XYZ",
+                        "image_url": "http://thecatapi.com/?id=e6u"
+                    },
+                    "text": "@Susanne is playing with @Anna",
+                    "media": [
+                        {
+                            "media_type": "1",
+                            "url" : "http://thecatapi.com/?id=dd4"
+                        },
+                        {
+                            "media_type": "2",
+                            "url": "http://thecatapi.com/?id=kd3"
+                        }
+                    ],
+                    "likes": [
+                        {
+                            "id": "4",
+                            "created_by": {
+                                "id": "97",
+                                "name": "Susanne's mom",
+                                "image_url": "http://thecatapi.com/?id=e6u"
+                            }
+                        },
+                        {
+                            "id": "5",
+                            "created_by": {
+                                "id": "98",
+                                "name": "Anna's mom",
+                                "image_url": "http://thecatapi.com/?id=e6u"
+                            }
+                        },
+                        {
+                            "id": "6",
+                            "created_by": {
+                                "id": "99",
+                                "name": "Some weird stalker",
+                                "image_url": "http://thecatapi.com/?id=e6u"
+                            }
+                        }
+                    ],
+                    "comments": [
+                        {
+                            "id": "1",
+                            "created_by": {
+                                "id": "5",
+                                "name": "Joe Doe",
+                                "image_url": "http://thecatapi.com/?id=e6u"
+                            },
+                            "text": "First!"
+                        }
+                    ]
+                }
+            ]
+
+### Create a new post [POST]
+
++ Request
+    + Headers
+
+            Authorization: Bearer {access_token}
+
++ Response 200 (application/json)
+
+    + Body
+    
+            { 
+                "post": {
+                    "text": "new message"
+            }
+
+### Edit my post [PUT /api/v1.0/posts/{post_id}]
++ Request
+    + Headers
+
+            Authorization: Bearer {access_token}
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "post" : {
+                    "message": "new_text"
+                }
+            }
+
+### Delete my post [DELETE /api/v1.0/posts/{post_id}]
+
++ Request
+    + Headers
+
+            Authorization: Bearer {access_token}
+
++ Response 204 (application/json)
+
+## Comments [/api/v1.0/posts/{post_id}/comments]
++ Parameters
+    + post_id: `13` - (number) the post id
+
+### List post comments [GET /api/v1.0/posts/{post_id}/comments]
+
+ Request
+    + Headers
+
+            Authorization: Bearer {access_token}
+
++ Response 200 (application/json)
+    + Body
+    
+            [
+                "comment": {
+                            "id" : "1",
+                            "name" : "John dad",
+                            "text" : "Glad to hear that",
+                            "created_at" : "2016-12-12"
+                        },
+                "comment": {
+                            "id": "2",
+                            "name": "Sue mom",
+                            "text": "Me too",
+                            "created_at" : "2016-12-13"
+                        }
+            ]
+
+## Post Likes [/api/v1.0/posts/{post_id}/likes]
++ Parameters
+    + post_id: `4` - (number) the post id
+
+### List post likes [GET /api/v1.0/posts/{post_id}/likes]
+
++ Request
+    + Headers
+
+            Authorization: Bearer {access_token}
+
++ Response 200 (application/json)
+    + Body
+    
+            [
+                "like": {
+                            "id" : "1",
+                            "name" : "John dad",
+                            "created_at" : "2016-12-12"
+                        },
+                "like": {
+                            "id": "2",
+                            "name": "Sue mom",
+                            "created_at" : "2016-12-13"
+                        }
+            ]
+
+## Comment Likes [/api/v1.0/posts/{post_id}/comments/{comment_id}/likes]
+
++ Parameters
+    + post_id: `4` - (number) the post id
+    + comment_id: `1` - (number) the comment id
+
+### List comment likes [GET /api/v1.0/posts/{post_id}/comment/{comment_id}/likes]
+
++ Request
+    + Headers
+
+            Authorization: Bearer {access_token}
+
++ Response 200 (application/json)
+    + Body
+    
+            [
+                "like": {
+                            "id" : "1",
+                            "name" : "John dad",
+                            "created_at" : "2016-12-12"
+                        },
+                "like": {
+                            "id": "2",
+                            "name": "Sue mom",
+                            "created_at" : "2016-12-13"
+                        }
+            ]
+
+## Search Users [/api/v1.0/search/users/{keyword}]
+
++ Parameters
+
+    + keyword: `Anna`' (string) - The keyword for user to search.
+
+### List all user search results [GET]
+
++ Request
+    + Headers
+
+            Authorization: Bearer {access_token}
+
++ Response 200 (application/json)
+    
+    + Body
+
+            [
+                "user": {
+                    "id": "10",
+                    "name": "Caretaker XYZ",
+                    "image_url": "http://thecatapi.com/?id=e6u"
+                },
+                
+                "user": {
+                    "id": "13",
+                    "name": "Staff member",
+                    "image_url": "http://images.com/?id=13d"
+                }
+            ]
+
+## Search Posts [/api/v1.0/search/posts/{id}{keyword}]
+
++ Parameters
+
+    + id: `1` (number) - The id of the children.
+    + keyword: `sick`' (string) - The keyword for posts to search.
+
+### List all posts search results [GET]
+
++ Request
+    + Headers
+
+            Authorization: Bearer {access_token}
+
++ Response 200 (application/json)
+    
+    + Body
+
+            [
+                "post": {
+                    "id": "10",
+                    "message": "John was sick"
+                },
+                
+                "post": {
+                    "id": "13",
+                    "name": "John was again sick"
+                }
+            ]
+
+## General Settings [/api/v1.0/settings/{id}/general_settings]
+
++ Parameters
+
+    + id: `1` (number) - The id of the user.
+
+### List general settings [GET]
+
++ Request
+    + Headers
+
+            Authorization: Bearer {access_token}
+
++ Response 200 (application/json)
+    
+    + Body
+    
+            {
+                "language": "German",
+                "push_notification": true
+            }
+
+## Language Settings [/api/v1.0/settings/{id}/language_setting]
+
++ Parameters
+
+    + id: `1` (number) - The id of the user.
+
+### List language setting [GET]
+
++ Request
+    + Headers
+
+            Authorization: Bearer {access_token}
+
++ Response 200 (application/json)
+    
+    + Body
+    
+            {
+                "language": "German"
+            }
+
+### Modify language setting [PUT]
+ Request
+    + Headers
+
+            Authorization: Bearer {access_token}
+    
+    + Attributes (language_setting)
+
++ Response 204
+
+## Push Notification Settings [/api/v1.0/settings/{id}/push_notification_setting]
+
++ Parameters
+
+    + id: `1` (number) - The id of the user.
+
+### List push notification setting [GET]
+
++ Request
+    + Headers
+
+            Authorization: Bearer {access_token}
+
++ Response 200 (application/json)
+    
+    + Body
+    
+            {
+                "push_notifications": true
+            }
+
+### Modify push notification setting [PUT]
+Request
+    + Headers
+
+            Authorization: Bearer {access_token}
+    
+    + Attributes (push_notification_setting)
+
++ Response 204
