@@ -7,7 +7,7 @@ Childcare application API calls.
 
 ## Sign In [/api/v1.0/sign_in/{email}{password}]
 
-### Sign in [POST]
+#### Sign in [POST]
 Performs the login (Based on the documentation here: https://github.com/timdorr/model-s-api/blob/master/apiary.apib)
 
 Returns an `access_token` which is passed along as a header with all future requests to authenticate the user.
@@ -30,7 +30,7 @@ You must provide the `Authorization: Bearer {access_token}` header in all other 
 
 ## Sign out [/api/v1.0/sign_out]
 
-### Sign out [DELETE]
+#### Sign out [DELETE]
 
 + Request
     + Headers
@@ -46,7 +46,7 @@ You must provide the `Authorization: Bearer {access_token}` header in all other 
 
     + id: `1` (number) - The id of the Child.
 
-### List child report [GET]
+#### List child report [GET]
 
 + Request
     + Headers
@@ -103,7 +103,7 @@ You must provide the `Authorization: Bearer {access_token}` header in all other 
                 }
             ]
 
-### Create a new child report [POST]
+#### Create a new child report [POST]
 
 Adds a new report.
 
@@ -119,7 +119,7 @@ Adds a new report.
     
     + Attributes (Report)
 
-#### Report [/reports/{reportid}]
+### Report [/reports/{reportid}]
 
 Resource representing one child report.
 
@@ -128,7 +128,7 @@ Resource representing one child report.
 
 + Attributes
     + id: 1 (number, required) - ID of the report
-    + children_id: 4 (number, required) - ID of the child
+    + child_id: 4 (number, required) - ID of the child
     + user_id: 3 (number, required) - ID of the staff
     + day: 20160226 (string, required) - Day of report
     + mood: Happy (string) - Child mood
@@ -143,7 +143,7 @@ Resource representing one child report.
 
     + id: `1` (number) - The id of the Child.
 
-### List all posts for child [GET]
+#### List all posts for child [GET]
 
 + Request
     + Headers
@@ -215,7 +215,7 @@ Resource representing one child report.
                 }
             ]
 
-### Create a new post [POST]
+#### Create a new post [POST]
 
 + Request
     + Headers
@@ -231,7 +231,7 @@ Resource representing one child report.
                     "text": "new message"
             }
 
-### Edit my post [PUT /api/v1.0/posts/{post_id}]
+#### Edit my post [PUT /api/v1.0/posts/{post_id}]
 + Request
     + Headers
 
@@ -247,7 +247,7 @@ Resource representing one child report.
                 }
             }
 
-### Delete my post [DELETE /api/v1.0/posts/{post_id}]
+#### Delete my post [DELETE /api/v1.0/posts/{post_id}]
 
 + Request
     + Headers
@@ -260,7 +260,7 @@ Resource representing one child report.
 + Parameters
     + post_id: `13` - (number) the post id
 
-### List post comments [GET /api/v1.0/posts/{post_id}/comments]
+#### List post comments [GET /api/v1.0/posts/{post_id}/comments]
 
  Request
     + Headers
@@ -289,7 +289,7 @@ Resource representing one child report.
 + Parameters
     + post_id: `4` - (number) the post id
 
-### List post likes [GET /api/v1.0/posts/{post_id}/likes]
+#### List post likes [GET /api/v1.0/posts/{post_id}/likes]
 
 + Request
     + Headers
@@ -318,7 +318,7 @@ Resource representing one child report.
     + post_id: `4` - (number) the post id
     + comment_id: `1` - (number) the comment id
 
-### List comment likes [GET /api/v1.0/posts/{post_id}/comment/{comment_id}/likes]
+#### List comment likes [GET /api/v1.0/posts/{post_id}/comment/{comment_id}/likes]
 
 + Request
     + Headers
@@ -347,7 +347,7 @@ Resource representing one child report.
 
     + keyword: `Anna`' (string) - The keyword for user to search.
 
-### List all user search results [GET]
+#### List all user search results [GET]
 
 + Request
     + Headers
@@ -379,7 +379,7 @@ Resource representing one child report.
     + id: `1` (number) - The id of the children.
     + keyword: `sick`' (string) - The keyword for posts to search.
 
-### List all posts search results [GET]
+#### List all posts search results [GET]
 
 + Request
     + Headers
@@ -408,7 +408,7 @@ Resource representing one child report.
 
     + id: `1` (number) - The id of the user.
 
-### List general settings [GET]
+#### List general settings [GET]
 
 + Request
     + Headers
@@ -430,7 +430,7 @@ Resource representing one child report.
 
     + id: `1` (number) - The id of the user.
 
-### List language setting [GET]
+#### List language setting [GET]
 
 + Request
     + Headers
@@ -445,7 +445,7 @@ Resource representing one child report.
                 "language": "German"
             }
 
-### Modify language setting [PUT]
+#### Modify language setting [PUT]
  Request
     + Headers
 
@@ -461,7 +461,7 @@ Resource representing one child report.
 
     + id: `1` (number) - The id of the user.
 
-### List push notification setting [GET]
+#### List push notification setting [GET]
 
 + Request
     + Headers
@@ -476,7 +476,7 @@ Resource representing one child report.
                 "push_notifications": true
             }
 
-### Modify push notification setting [PUT]
+#### Modify push notification setting [PUT]
 Request
     + Headers
 
