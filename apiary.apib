@@ -47,7 +47,7 @@ You must provide the `Authorization: Bearer {access_token}` header in all other 
 
     + id: `1` (number) - The id of the Child.
 
-### Report [/reports/{child_id}&{report_date}]
+### Report [/api/v1.0/reports/{child_id}/{?report_date}]
 
 Resource representing one child report.
 
@@ -70,10 +70,6 @@ Resource representing one child report.
 #### List child report [GET]
 
 Display a child report for today or in specific date
-
-+ Parameters
-    + child_id (number, required) - child id for report
-    + report_date (string, optional) - date for the report
 
 + Request
     + Headers
