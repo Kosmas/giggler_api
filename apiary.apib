@@ -214,34 +214,67 @@ Adds a new child report.
 
 + Response 204 (application/json)
 
-## Comments [/api/v1.0/posts/{post_id}/comments]
+### Comment [/api/v1.0/child/{child_id}/posts/{post_id}/comments/{comment_id}]
+
+Resource representing a post comment.
+
 + Parameters
-    + post_id: `13` - (number) the post id
+    + child_id: 5 - (number, required) - ID for the child
+    + post_id: 2 - (number, required) - ID for the post
+    + comment_id: 13 - (number, required) - ID for the comment
 
-#### List post comments [GET /api/v1.0/posts/{post_id}/comments]
++ Attributes
+    + id: 123 - (number, required) - ID for the comment
+    + post_id: 45 - (number, required) - ID for the post
+    + user_id: 33 - (number, required) - ID for the user
+    + text: This is a message - (string, required) - message text
+    + created_at: 20160215102334 - (string, required) - message created date
 
- Request
+#### Retrieve comment [GET]
+
+Retrieves an individual comment.
+
++ Request
     + Headers
 
             Authorization: Bearer {access_token}
 
 + Response 200 (application/json)
-    + Body
+    + Attributes (Comment)
+
+#### Update own comment [PUT]
+
+Updates own comment.
+
++ Request (application/json)
+    + Headers
     
-            [
-                "comment": {
-                            "id" : "1",
-                            "name" : "John dad",
-                            "text" : "Glad to hear that",
-                            "created_at" : "2016-12-12"
-                        },
-                "comment": {
-                            "id": "2",
-                            "name": "Sue mom",
-                            "text": "Me too",
-                            "created_at" : "2016-12-13"
-                        }
-            ]
+            Authorization: Bearer {access_token}
+    
+    + Attributes (Comment)
+    
++ Response 204 (application/json)
+
+    Comment updated
+    
+    + Attributes (Comment)
+
+#### Add new comment [POST]
+
+Adds a new comment.
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer {access_token}
+    
+    + Attributes (Comment)
+
++ Response 201 (application/json)
+
+    Comment created.
+    
+    + Attributes (Comment)
 
 ## Post Likes [/api/v1.0/posts/{post_id}/likes]
 + Parameters
