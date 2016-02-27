@@ -77,7 +77,7 @@ Display a child report for today or in specific date
             Authorization: Bearer {access_token}
 
 + Response 200 (application/json)
-     + Attributes (Report)
+    + Attributes (Report)
     
 #### Create a new child report [POST]
 
@@ -172,47 +172,77 @@ Adds a new child report.
                     ]
                 }
             ]
+            
+### Post [/api/v1.0/child/{child_id}/posts/{post_id}]
+
+Resource representing a post.
+
++ Parameters
+    + child_id: 3 - (number, required) - ID for the child
+    + post_id: 14 - (number, required) - ID for the post
+
++ Attributes
+    + id: 34 - (number, required) - ID for the post
+    + child_id: 5 - (number, required) - ID for the child
+    + user_id: 33 - (number, required) - ID for the user
+    + post_text: This is a post - (string, required) - Post text
+    + media_url: http://test.com/resource/id - (string, optional) - URL for media
+    + created_at: 20151023114534 - (string, required) - Datetime created
+
+#### Retrieve post [GET]
+
+Retrieves an individual post.
+
++ Request
+    + Headers
+    
+            Authorization: Bearer {access_token}
+            
++ Response 200 (application/json)
+    + Attributes (Post)
+
+#### Update own post [PUT]
+
+Updates own post.
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer {access_token}
+    
+    + Attributes (Post)
+
++ Response 204 (application/json)
+
+    Post updated
+    
+    + Attributes (Post)
 
 #### Create a new post [POST]
 
-+ Request
+Adds a new post.
+
++ Request (application/json)
     + Headers
 
             Authorization: Bearer {access_token}
-
-+ Response 200 (application/json)
-
-    + Body
+            
+    + Attributes (Post)
     
-            { 
-                "post": {
-                    "text": "new message"
-            }
++ Response 201 (application/json)
 
-#### Edit my post [PUT /api/v1.0/posts/{post_id}]
-+ Request
-    + Headers
-
-            Authorization: Bearer {access_token}
-
-+ Response 200 (application/json)
-
-    + Body
+    Post created.
     
-            {
-                "post" : {
-                    "message": "new_text"
-                }
-            }
+    + Attributes (Post)
 
-#### Delete my post [DELETE /api/v1.0/posts/{post_id}]
+#### Delete my post [DELETE]
 
 + Request
     + Headers
 
             Authorization: Bearer {access_token}
 
-+ Response 204 (application/json)
++ Response 204
 
 ### Comment [/api/v1.0/child/{child_id}/posts/{post_id}/comments/{comment_id}]
 
