@@ -415,6 +415,51 @@ Unlikes a post.
                         }
             ]
 
+### Comment Like [/api/v1.0/child/{child_id}/posts/{post_id}/comments/{comment_id}/likes/{like_id}]
+
+Resource representing a comment like.
+
++ Parameters
+    + child_id: 6 - (number, required) - ID for the child
+    + post_id: 55 - (number, required) - ID for the post
+    + comment_id: 87 - (number, required) - ID for the comment
+    + like_id: 22 - (number, required) - ID for the like
+
++ Attributes
+    + id: 43 - (number, required) - ID for the like
+    + post_id: 33 - (number, required) - ID for the post
+    + comment_id: 44 - (number, required) - ID for the comment
+    + user_id: 11 - (number, required) - ID for the user
+    + created_at: 20151110083456 - (string, required) - like created datetime
+
+#### Like a comment [POST]
+
+Likes a comment.
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer {access_token}
+    
+    + Attributes (Comment Like)
+
++ Response 201 (application/json)
+
+    Comment like created.
+    
+    + Attributes (Comment Like)
+
+#### Unlike a comment [DELETE]
+
+Unlikes a comment.
+
++ Request
+    + Headers
+    
+            Authorization: Bearer {access_token}
+            
++ Response 204
+
 ## Search Users [/api/v1.0/search/users/{keyword}]
 
 + Parameters
