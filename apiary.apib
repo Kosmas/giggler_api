@@ -343,6 +343,49 @@ Adds a new comment.
                         }
             ]
 
+### Post Like [/api/v1.0/child/{child_id}/posts/{post_id}/likes/{like_id}]
+
+Resource representing a post like.
+
++ Parameters
+    + child_id: 6 - (number, required) - ID for the child
+    + post_id: 55 - (number, required) - ID for the post
+    + like_id: 22 - (number, required) - ID for the like
+
++ Attributes
+    + id: 43 - (number, required) - ID for the like
+    + post_id: 33 - (number, required) - ID for the post
+    + user_id: 11 - (number, required) - ID for the user
+    + created_at: 20151110083456 - (string, required) - like created datetime
+
+#### Like a post [POST]
+
+Likes a post.
+
++ Request (application/json)
+    + Headers
+    
+            Authorization: Bearer {access_token}
+    
+    + Attributes (Post Like)
+
++ Response 201 (application/json)
+
+    Comment created.
+    
+    + Attributes (Post Like)
+
+#### Unlike a post [DELETE]
+
+Unlikes a post.
+
++ Request
+    + Headers
+    
+            Authorization: Bearer {access_token}
+            
++ Response 204
+
 ## Comment Likes [/api/v1.0/posts/{post_id}/comments/{comment_id}/likes]
 
 + Parameters
