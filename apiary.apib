@@ -290,32 +290,32 @@ Adds a new comment.
             
 + Response 204
 
-## Post Likes [/api/v1.0/posts/{post_id}/likes]
-+ Parameters
-    + post_id: `4` - (number) the post id
+### Post Likes [/api/v1.0/child/{child_id}/posts/{post_id}/likes]
 
-#### List post likes [GET /api/v1.0/posts/{post_id}/likes]
+Resource representing all likes for a post
+
++ Parameters
+    + child_id: 15 - (number, required) - ID for the child
+    + post_id: 4 - (number, required) - ID for the post
+
++ Attributes (array[Post Like])
+
+#### List all likes for a post [GET]
+
+Retrieves all likes for a post
+
++ Parameters
+    + child_id: 41 - (number, required) - ID for the child
+    + post_id: 111 - (number, required) - ID for the post
 
 + Request
     + Headers
-
+    
             Authorization: Bearer {access_token}
 
 + Response 200 (application/json)
-    + Body
-    
-            [
-                "like": {
-                            "id" : "1",
-                            "name" : "John dad",
-                            "created_at" : "2016-12-12"
-                        },
-                "like": {
-                            "id": "2",
-                            "name": "Sue mom",
-                            "created_at" : "2016-12-13"
-                        }
-            ]
+
+    + Attributes (Post Likes)
 
 ### Post Like [/api/v1.0/child/{child_id}/posts/{post_id}/likes/{like_id}]
 
