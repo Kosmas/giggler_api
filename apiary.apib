@@ -192,6 +192,33 @@ Adds a new post.
 
 + Response 204
 
+### Comments [/api/v1.0/child/{child_id}/pots/{post_id}/comments]
+
+Resource representing all comments for a post
+
++ Parameters
+    + child_id: 33 - (number, required) - ID for the child
+    + post_id: 12 - (number, required) - ID for the post
+
++ Attributes (array[Comment])
+
+#### List all comments for a post [GET]
+
+Retrieves all comments for a post
+
++ Parameters
+    + child_id: 41 - (number, required) - ID for the child
+    + post_id: 111 - (number, required) - ID for the post
+
++ Request
+    + Headers
+    
+            Authorization: Bearer {access_token}
+
++ Response 200 (application/json)
+
+    + Attributes (Comments)
+
 ### Comment [/api/v1.0/child/{child_id}/posts/{post_id}/comments/{comment_id}]
 
 Resource representing a post comment.
