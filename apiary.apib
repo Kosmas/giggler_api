@@ -120,7 +120,7 @@ Retrieves all posts for a child
 + Response 200 (application/json)
 
     + Attributes (Posts)
-            
+
 ### Post [/api/v1.0/child/{child_id}/posts/{post_id}]
 
 Resource representing a post.
@@ -494,6 +494,31 @@ Unlikes a comment.
                     "name": "John was again sick"
                 }
             ]
+
+### Search Reports [/api/v1.0/search/{child_id}/reports/{report_date}]
+
+Search reports for specific date
+
++ Parameters
+    + child_id: 11 - (number, required) - ID for the child
+    + report_date: 20160202 - (string, required) - Date for specific report
+
+#### Find date report [GET]
+
+Find report for a specific date
+
++ Request
+    + Headers
+
+            Authorization: Bearer {access_token}
+
++ Response 200 (application/json)
+
+    + Attributes (Report)
+
++ Response 404 (application/json)
+
+        Not found
 
 ## General Settings [/api/v1.0/settings/{id}/general_settings]
 
