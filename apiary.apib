@@ -96,83 +96,30 @@ Adds a new child report.
     
     + Attributes (Report)
 
-## Posts [/api/v1.0/posts/{id}]
+### Posts [/api/v1.0/child/{child_id}/posts]
+
+Resource representing all posts for a child
 
 + Parameters
-
-    + id: `1` (number) - The id of the Child.
+    + child_id: 14 - (number, required) - ID for the child
+    
++ Attributes (array[Post])
 
 #### List all posts for child [GET]
+
+Retrieves all posts for a child
+
++ Parameters
+    + child_id: 23 - (number, required) - ID for the child
 
 + Request
     + Headers
 
             Authorization: Bearer {access_token}
 
-
 + Response 200 (application/json)
-    
-    + Body
 
-            [
-                {
-                    "id": "5",
-                    "created_at": "2015-08-05T08:40:51.620Z",
-                    "created_by": {
-                        "id": "10",
-                        "name": "Caretaker XYZ",
-                        "image_url": "http://thecatapi.com/?id=e6u"
-                    },
-                    "text": "@Susanne is playing with @Anna",
-                    "media": [
-                        {
-                            "media_type": "1",
-                            "url" : "http://thecatapi.com/?id=dd4"
-                        },
-                        {
-                            "media_type": "2",
-                            "url": "http://thecatapi.com/?id=kd3"
-                        }
-                    ],
-                    "likes": [
-                        {
-                            "id": "4",
-                            "created_by": {
-                                "id": "97",
-                                "name": "Susanne's mom",
-                                "image_url": "http://thecatapi.com/?id=e6u"
-                            }
-                        },
-                        {
-                            "id": "5",
-                            "created_by": {
-                                "id": "98",
-                                "name": "Anna's mom",
-                                "image_url": "http://thecatapi.com/?id=e6u"
-                            }
-                        },
-                        {
-                            "id": "6",
-                            "created_by": {
-                                "id": "99",
-                                "name": "Some weird stalker",
-                                "image_url": "http://thecatapi.com/?id=e6u"
-                            }
-                        }
-                    ],
-                    "comments": [
-                        {
-                            "id": "1",
-                            "created_by": {
-                                "id": "5",
-                                "name": "Joe Doe",
-                                "image_url": "http://thecatapi.com/?id=e6u"
-                            },
-                            "text": "First!"
-                        }
-                    ]
-                }
-            ]
+    + Attributes (Posts)
             
 ### Post [/api/v1.0/child/{child_id}/posts/{post_id}]
 
