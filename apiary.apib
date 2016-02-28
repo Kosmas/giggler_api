@@ -434,13 +434,38 @@ Unlikes a comment.
             
 + Response 204
 
-## Search Users [/api/v1.0/search/users/{keyword}]
+### User [/api/v1.0/users/{user_id}]
+
+Resource representing user
+
++ Parameters
+    + user_id: 13 - (number, required) - The ID of the user
+
++ Attributes
+    + id: 344 - (number, required) - The ID of the user
+    + first_name - John - (string, required) - The first name for the user
+    + last_name - Smith - (string, required) - The last name for the user
+    + user_type - Staff - (enum, required) - The type of the user
+
+### Users [/api/v1.0/users]
+
+Resource representing all users
+
++ Attributes (array[User])
+
+### Search Users [/api/v1.0/search/users/{user_name}]
+
+Search users
 
 + Parameters
 
-    + keyword: `Anna`' (string) - The keyword for user to search.
+    + user_name: Anna' - (string, required) - The user name to search for.
+
++ Attributes (array[User])
 
 #### List all user search results [GET]
+
+List users
 
 + Request
     + Headers
@@ -449,21 +474,7 @@ Unlikes a comment.
 
 + Response 200 (application/json)
     
-    + Body
-
-            [
-                "user": {
-                    "id": "10",
-                    "name": "Caretaker XYZ",
-                    "image_url": "http://thecatapi.com/?id=e6u"
-                },
-                
-                "user": {
-                    "id": "13",
-                    "name": "Staff member",
-                    "image_url": "http://images.com/?id=13d"
-                }
-            ]
+    + Attributes(Users)
 
 ## Search Posts [/api/v1.0/search/posts/{id}{keyword}]
 
