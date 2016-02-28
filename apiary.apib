@@ -476,12 +476,14 @@ List users
     
     + Attributes(Users)
 
-## Search Posts [/api/v1.0/search/posts/{id}{keyword}]
+### Search Posts [/api/v1.0/search/child_id/{child_id}/posts/{post_keyword}]
+
+Search posts
 
 + Parameters
 
-    + id: `1` (number) - The id of the children.
-    + keyword: `sick`' (string) - The keyword for posts to search.
+    + child_id: 1 - (number, required) - The ID for the child.
+    + post_keyword: sick - (string, required) - The keyword for posts to search.
 
 #### List all posts search results [GET]
 
@@ -492,19 +494,7 @@ List users
 
 + Response 200 (application/json)
     
-    + Body
-
-            [
-                "post": {
-                    "id": "10",
-                    "message": "John was sick"
-                },
-                
-                "post": {
-                    "id": "13",
-                    "name": "John was again sick"
-                }
-            ]
+    + Attributes (Posts)
 
 ### Search Reports [/api/v1.0/search/{child_id}/reports/{report_date}]
 
