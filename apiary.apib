@@ -5,7 +5,7 @@ HOST: http://giggles.ch
 
 Childcare application API calls.
 
-## Sign In [/api/v1.0/sign_in/{email}{password}]
+## Sign In [/api/v1.0/sign_in/]
 
 #### Sign in [POST]
 
@@ -15,10 +15,12 @@ Returns an `access_token` which is passed along as a header with all future requ
 
 You must provide the `Authorization: Bearer {access_token}` header in all other requests.
 
-+ Parameters
-    + email: 'test@test.com' (string) - User email
-    + password: 'pass' (string) - User password
-    
++ Request (application/json)
+
+        {
+            "email": "some-user-email@ddress",
+            "password": "a-password"
+        }
 
 + Response 200 (application/json)
     + Body
@@ -40,6 +42,27 @@ You must provide the `Authorization: Bearer {access_token}` header in all other 
 
 
 + Response 204
+
+## Forgot Password [/api/v1.0/forgot_password/]
+
+#### Forgot password [POST]
+
+This API call is used to notify that the user with this {email} has
+fogotten their password.
+
++ Request (application/json)
+
+        {
+            "email": "user-email@ddress",
+        }
+
+
++ Response 200 (application/json)
+    + Body
+            
+            {
+              "status": "ok"
+            }
 
 ## My Day [/api/v1.0/my_day/{id}]
 
