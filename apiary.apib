@@ -92,19 +92,20 @@ fogotten their password.
     + start_time: 11:30 (string, required) - Start time of the nap
     + end_time: 12:00 (string, required) - End time of the nap
 
-## FoodItem [/api/v1.0/reports/food_item]
+## Meal [/api/v1.0/reports/food_item]
 
 + Attributes
     + name: Botifarra de pages (string, required) - Name of the dish
     + amount: 2 (number, required) - Amount of servings
     + unit: portions (string, required) - Type of serving (portion, slice, etc.)
-
-## DailyMeals [/api/v1.0/reports/meals]
+    + time: Morning snack (string, required) - When it was served
+    
+## Nappy [/api/v1.0/reports/nappy]
 
 + Attributes
-    + morning (FoodItem) - Morning snack
-    + lunch (FoodItem) - Lunch dish
-    + afternoon (FoodItem) - Afternoon snack
+    + nappies: 3 (number, required) - Number of nappy changes
+    + poos : 2 (number, required) - Number of poos
+    + notes: Some poo notes, every parent loves those. (string, required) - Poo notes
 
 ## Report [/api/v1.0/reports/{child_id}]
 
@@ -119,9 +120,9 @@ Resource representing one child report.
     + user_id: 3 (number, required) - ID of the staff
     + day: 20160226 (string, required) - Day of report
     + mood: Happy (string) - Child mood
-    + food (DailyMeals) child ate
+    + food (array[Meal]) child ate
     + sleep (array[Sleep]) - Sleep times
-    + nappy: 3 nappies, 2 poos (array) - Nappy changes
+    + nappy (Nappy) - Nappy changes
     + milestone:  I said my first word today: Mama (string) - Mileston text
     + notes: Some notes (string) - General notes
 
