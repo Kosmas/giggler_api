@@ -5,9 +5,33 @@ HOST: http://giggles.ch
 
 Childcare application API calls.
 
+## Group [/api/v1.0/group]
+
++ Attributes
+    + name: Honey bees (string, required) - Name of the group
+    + id: 38 (number, required) - ID of the group
+
+
+## Child [/api/v1.0/child]
+    
++ Attributes
+    + name: Kathy (string, required) - Name of the child
+    + id: 4 (number, required) - ID of the child
+    + photo: http://images3.wikia.nocookie.net/__cb20120819074606/secretlife/images/8/80/Kathy123.jpg (string, required) - Photo URL
+
+
+## AuthenticationSuccess [/api/v1.0/authentication]
+
++ Attributes
+    + access_token: "abc123" (string, required) - Access token to use
+    + token_type: "bearer" (string, required)
+    + expires_in: 7776000 (number, required) - Token expiration time in ???
+    + children (array[Child], optional) - children the user has (if it was parent login)
+    + group (Group) - Group the child(ren) belongs to
+
 ## Sign In [/api/v1.0/sign_in/]
 
-#### Sign in [POST]
+### Sign in [POST]
 
 Performs the login (Based on the documentation here: https://github.com/timdorr/model-s-api/blob/master/apiary.apib)
 
@@ -19,21 +43,18 @@ You must provide the `Authorization: Bearer {access_token}` header in all other 
 
         {
             "email": "some-user-email@ddress",
-            "password": "a-password"
+            "password": "a-password",
+            "source": "iphone"
         }
 
 + Response 200 (application/json)
-    + Body
 
-            {
-              "access_token": "abc123",
-              "token_type": "bearer",
-              "expires_in": 7776000
-            }
+    + Attributes (AuthenticationSuccess)
+
 
 ## Sign out [/api/v1.0/sign_out]
 
-#### Sign out [DELETE]
+### Sign out [DELETE]
 
 + Request
     + Headers
@@ -45,7 +66,7 @@ You must provide the `Authorization: Bearer {access_token}` header in all other 
 
 ## Forgot Password [/api/v1.0/forgot_password/]
 
-#### Forgot password [POST]
+### Forgot password [POST]
 
 This API call is used to notify that the user with this {email} has
 fogotten their password.
@@ -63,14 +84,29 @@ fogotten their password.
             {
               "status": "ok"
             }
+            
+            
+## Sleep [/api/v1.0/reports/sleep]
 
-## Group Reports 
++ Attributes
+    + start_time: 11:30 (string, required) - Start time of the nap
+    + end_time: 12:00 (string, required) - End time of the nap
 
-+ Parameters
+## FoodItem [/api/v1.0/reports/food_item]
 
-    + id: `1` (number) - The id of the Child.
++ Attributes
+    + name: Botifarra de pages (string, required) - Name of the dish
+    + amount: 2 (number, required) - Amount of servings
+    + unit: portions (string, required) - Type of serving (portion, slice, etc.)
 
-### Report [/api/v1.0/reports/{child_id}]
+## DailyMeals [/api/v1.0/reports/meals]
+
++ Attributes
+    + morning (FoodItem) - Morning snack
+    + lunch (FoodItem) - Lunch dish
+    + afternoon (FoodItem) - Afternoon snack
+
+## Report [/api/v1.0/reports/{child_id}]
 
 Resource representing one child report.
 
@@ -83,13 +119,14 @@ Resource representing one child report.
     + user_id: 3 (number, required) - ID of the staff
     + day: 20160226 (string, required) - Day of report
     + mood: Happy (string) - Child mood
-    + food: {Morning => 1 Banana, Lunch => 2 portions} (object) - Daily food
-    + sleep: 11.30-12.30, 14:00 - 14:30 (array) - Sleep times
+    + food (DailyMeals) child ate
+    + sleep (array[Sleep]) - Sleep times
     + nappy: 3 nappies, 2 poos (array) - Nappy changes
     + milestone:  I said my first word today: Mama (string) - Mileston text
     + notes: Some notes (string) - General notes
 
-#### Retrieve [GET]
+
+### Retrieve [GET]
 
 Display last published child report
 
@@ -102,7 +139,7 @@ Display last published child report
 
     + Attributes (Report)
     
-#### Create a new child report [POST]
+### Create a new child report [POST]
 
 Adds a new child report.
 
@@ -119,12 +156,12 @@ Adds a new child report.
     
     + Attributes (Report)
     
-#### Report for specific date [/api/v1.0/reports/{child_id}/date/{report_date}]
+### Report for specific date [/api/v1.0/reports/{child_id}/date/{report_date}]
 
 + Parameters
     + report_date:  20160226 - (string, required) - date for the report
 
-#### Retrieve [GET]
+### Retrieve [GET]
 
 Display child report for a particular date.
 
@@ -137,7 +174,7 @@ Display child report for a particular date.
 
     + Attributes (Report)
 
-### Posts [/api/v1.0/child/{child_id}/posts]
+## Posts [/api/v1.0/child/{child_id}/posts]
 
 Resource representing all posts for a child
 
