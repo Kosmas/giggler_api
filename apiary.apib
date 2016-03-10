@@ -26,6 +26,7 @@ Childcare application API calls.
     + access_token: "abc123" (string, required) - Access token to use
     + token_type: "bearer" (string, required)
     + expires_in: 7776000 (number, required) - Token expiration time in ???
+    + avatar: "http://images.clipartpanda.com/woman-clip-art-royalty-free-woman-clipart-illustration-92299.jpg" (string, required) - User's profile image
     + children (array[Child], optional) - children the user has (if it was parent login)
     + group (Group) - Group the child(ren) belongs to
 
@@ -48,8 +49,22 @@ You must provide the `Authorization: Bearer {access_token}` header in all other 
         }
 
 + Response 200 (application/json)
+    + Body
 
-    + Attributes (AuthenticationSuccess)
+            {
+                "access_token":"abc123",
+                "token_type":"bearer",
+                "expires_in":7776000,
+                "avatar": "http://images.clipartpanda.com/woman-clip-art-royalty-free-woman-clipart-illustration-92299.jpg",
+                "children":[
+                    {"name":"Kathy","id":4,"photo":"http://images3.wikia.nocookie.net/__cb20120819074606/secretlife/images/8/80/Kathy123.jpg"},
+                    {"name":"Betty","id":2,"photo":"http://barbieplanet.ru/wp-content/uploads/2011/03/betty-teen-original2.jpg"}
+                ],
+                "group":{
+                    "name":"Honey bees",
+                    "id":38
+                }
+            }
 
 
 ## Sign out [/api/v1.0/sign_out]
@@ -98,7 +113,7 @@ fogotten their password.
     + name: Botifarra de pages (string, required) - Name of the dish
     + amount: 2 (number, required) - Amount of servings
     + unit: portions (string, required) - Type of serving (portion, slice, etc.)
-    + time: Morning snack (string, required) - When it was served
+    + time: lunch (string, required) - When it was served
     
 ## Nappy [/api/v1.0/reports/nappy]
 
@@ -137,9 +152,24 @@ Display last published child report
             Authorization: Bearer {access_token}
 
 + Response 200 (application/json)
-
-    + Attributes (Report)
+    + Body
     
+            {
+                "id":1,
+                "child_id":4,
+                "user_id":3,
+                "day":"20160226",
+                "mood":"Happy",
+                "food":[
+                    {"name":"Fresh banana","amount":2,"unit":"portions","time":"morning"},
+                    {"name":"Botifarra de pages","amount":2,"unit":"portions","time":"lunch"},
+                    {"name":"Apple","amount":2,"unit":"portions","time":"afternoon"}
+                ],
+                "sleep":[{"start_time":"11:30","end_time":"12:00"}],
+                "nappy":{"nappies":3,"poos":2,"notes":"Some poo notes, every parent loves those."},
+                "milestone":"I said my first word today: Mama","notes":"Some notes"
+            }
+            
 ### Create a new child report [POST]
 
 Adds a new child report.
