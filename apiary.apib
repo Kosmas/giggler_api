@@ -1,34 +1,59 @@
 FORMAT: 1A
 HOST: http://giggles.ch
 
-# Childcare API
+# Childcare API introduction
 
 Childcare application API calls.
 
-## Group [/api/v1.0/group]
+# Data Structures
 
-+ Attributes
-    + name: Honey bees (string, required) - Name of the group
-    + id: 38 (number, required) - ID of the group
+## Report Base (object)
 
++ food (array[Meal]) child ate
 
-## Child [/api/v1.0/child]
+## Report Extended (Report Base)
+
++ day: 20160226 (string, required) - Day of report
++ mood: Happy (string) - Child mood
++ sleep (array[Sleep]) - Sleep times
++ nappy (Nappy) - Nappy changes
++ milestones (optional, array[string]) - Array of Milestone descriptions
++ id: 1 (number, required) - ID of the report
++ child_id: 4 (number, required) - ID of the child
++ user_id: 3 (number, required) - ID of the staff
++ published (boolean, required) - says whether it's a published or a draft
+
+## Group
+
++ name: Honey bees (string, required) - Name of the group
++ id: 38 (number, required) - ID of the group
+
+## Child
     
-+ Attributes
-    + name: Kathy (string, required) - Name of the child
-    + id: 4 (number, required) - ID of the child
-    + photo: http://images3.wikia.nocookie.net/__cb20120819074606/secretlife/images/8/80/Kathy123.jpg (string, required) - Photo URL
++ name: Kathy (string, required) - Name of the child
++ id: 4 (number, required) - ID of the child
++ photo: http://images3.wikia.nocookie.net/__cb20120819074606/secretlife/images/8/80/Kathy123.jpg (string, required) - Photo URL
+
+## Sleep
+
++ start_time: 11:30 (string, required) - Start time of the nap
++ end_time: 12:00 (string, required) - End time of the nap
+
+## Meal
+
++ name: Botifarra de pages (string, required) - Name of the dish
++ amount: 2 (number, required) - Amount of servings
++ unit: portions (string, required) - Type of serving (portion, slice, etc.)
++ time: lunch (string, required) - When it was served
+
+## Nappy
+
++ nappies: 3 (number, required) - Number of nappy changes
++ poos : 2 (number, required) - Number of poos
++ notes: Some poo notes, every parent loves those. (string, required) - Poo notes
 
 
-## AuthenticationSuccess [/api/v1.0/authentication]
-
-+ Attributes
-    + access_token: "abc123" (string, required) - Access token to use
-    + token_type: "bearer" (string, required)
-    + expires_in: 7776000 (number, required) - Token expiration time in ???
-    + avatar: "http://images.clipartpanda.com/woman-clip-art-royalty-free-woman-clipart-illustration-92299.jpg" (string, required) - User's profile image
-    + children (array[Child], optional) - children the user has (if it was parent login)
-    + group (Group) - Group the child(ren) belongs to
+# Group Authentication
 
 ## Sign In [/api/v1.0/sign_in/]
 
@@ -99,52 +124,22 @@ fogotten their password.
             {
               "status": "ok"
             }
-            
-            
-## Sleep [/api/v1.0/reports/sleep]
 
-+ Attributes
-    + start_time: 11:30 (string, required) - Start time of the nap
-    + end_time: 12:00 (string, required) - End time of the nap
+# Group Reports
 
-## Meal [/api/v1.0/reports/food_item]
-
-+ Attributes
-    + name: Botifarra de pages (string, required) - Name of the dish
-    + amount: 2 (number, required) - Amount of servings
-    + unit: portions (string, required) - Type of serving (portion, slice, etc.)
-    + time: lunch (string, required) - When it was served
-    
-## Nappy [/api/v1.0/reports/nappy]
-
-+ Attributes
-    + nappies: 3 (number, required) - Number of nappy changes
-    + poos : 2 (number, required) - Number of poos
-    + notes: Some poo notes, every parent loves those. (string, required) - Poo notes
-
-## Report [/api/v1.0/reports/{child_id}]
+## Report [/api/v1.0/reports/date/{date}/child/{child_id}]
 
 Resource representing one child report.
 
 + Parameters
-    + child_id:  4 - (number, required) - child id for the report
+    + child_id:  4 (number, required) - child id for the report
+    + date: 2015-03-04 (string, required) - date of the report to get
 
-+ Attributes
-    + id: 1 (number, required) - ID of the report
-    + child_id: 4 (number, required) - ID of the child
-    + user_id: 3 (number, required) - ID of the staff
-    + day: 20160226 (string, required) - Day of report
-    + mood: Happy (string) - Child mood
-    + food (array[Meal]) child ate
-    + sleep (array[Sleep]) - Sleep times
-    + nappy (Nappy) - Nappy changes
-    + milestone:  I said my first word today: Mama (string) - Mileston text
-    + notes: Some notes (string) - General notes
-
++ Attributes (Report Extended)
 
 ### Retrieve [GET]
 
-Display last published child report
+Retrieve a report for a particular date and child ID
 
 + Request
     + Headers
@@ -167,43 +162,90 @@ Display last published child report
                 ],
                 "sleep":[{"start_time":"11:30","end_time":"12:00"}],
                 "nappy":{"nappies":3,"poos":2,"notes":"Some poo notes, every parent loves those."},
-                "milestone":"I said my first word today: Mama","notes":"Some notes"
+                "milestone":"I said my first word today: Mama","notes":"Some notes",
+                "published": true
             }
-            
-### Create a new child report [POST]
 
-Adds a new child report.
+### Update [PUT]
+
+Update data of a particular report 
+
++ Attributes (Report Base)
 
 + Request (application/json)
-    + Headers
-    
-            Authorization: Bearer {access_token}
 
-    + Attributes (Report)
-            
-+ Response 201 (application/json)
-    
-    Report created.
-    
-    + Attributes (Report)
-    
-### Report for specific date [/api/v1.0/reports/{child_id}/date/{report_date}]
++ Response 204 (application/json)
+
+
+## Reports [/api/v1.0/reports/date/{date}]
+
+Resource representing an array of reports.
 
 + Parameters
-    + report_date:  20160226 - (string, required) - date for the report
+    + date: 2015-03-04 (string, required) - date of the report to get
+    
++ Attributes (array[Report Extended])
 
 ### Retrieve [GET]
 
-Display child report for a particular date.
+Retrieve an array of reports for a particular date
 
 + Request
     + Headers
-
+    
             Authorization: Bearer {access_token}
 
 + Response 200 (application/json)
+    + Body
+    
+            [
+                {
+                    "id":1,
+                    "child_id":4,
+                    "user_id":3,
+                    "day":"20160226",
+                    "mood":"Happy",
+                    "food":[
+                        {"name":"Fresh banana","amount":2,"unit":"portions","time":"morning"},
+                        {"name":"Botifarra de pages","amount":2,"unit":"portions","time":"lunch"},
+                        {"name":"Apple","amount":2,"unit":"portions","time":"afternoon"}
+                    ],
+                    "sleep":[{"start_time":"11:30","end_time":"12:00"}],
+                    "nappy":{"nappies":3,"poos":2,"notes":"Some poo notes, every parent loves those."},
+                    "milestone":"I said my first word today: Mama","notes":"Some notes",
+                    "published": true
+                },
+                {
+                    "id":1,
+                    "child_id":5,
+                    "user_id":3,
+                    "day":"20160226",
+                    "mood":"Sad",
+                    "food":[
+                        {"name":"Fresh banana","amount":1,"unit":"portions","time":"morning"},
+                        {"name":"Botifarra de pages","amount":1,"unit":"portions","time":"lunch"},
+                        {"name":"Apple","amount":5,"unit":"portions","time":"afternoon"}
+                    ],
+                    "sleep":[{"start_time":"11:30","end_time":"12:30"}],
+                    "nappy":{"nappies":2,"poos":1,"notes":"Basic poo note."}
+                    "milestone":"","notes":"",
+                    "published": false
+                }
+            ]
 
-    + Attributes (Report)
+### Update [POST]
+
+Mass create reports for a particular day optionally seeded with Food data.
+
++ Attributes (Report Base)
+
++ Request (application/json)
+
++ Response 204 (application/json)
+
+
+
+# Group Posts
 
 ## Posts [/api/v1.0/child/{child_id}/posts]
 
