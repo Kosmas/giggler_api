@@ -27,6 +27,7 @@ Childcare application API calls.
 
 + name: Honey bees (string, required) - Name of the group
 + id: 38 (number, required) - ID of the group
++ children (array[Child]) - Children in the group
 
 ## Child
     
@@ -83,11 +84,15 @@ You must provide the `Authorization: Bearer {access_token}` header in all other 
                 "avatar": "http://images.clipartpanda.com/woman-clip-art-royalty-free-woman-clipart-illustration-92299.jpg",
                 "children":[
                     {"name":"Kathy","id":4,"photo":"http://images3.wikia.nocookie.net/__cb20120819074606/secretlife/images/8/80/Kathy123.jpg"},
-                    {"name":"Betty","id":2,"photo":"http://barbieplanet.ru/wp-content/uploads/2011/03/betty-teen-original2.jpg"}
+                    {"name":"Betty","id":5,"photo":"http://barbieplanet.ru/wp-content/uploads/2011/03/betty-teen-original2.jpg"}
                 ],
                 "group":{
                     "name":"Honey bees",
-                    "id":38
+                    "id":38,
+                    "children": [
+                        {"name":"Kathy","id":4,"photo":"http://images3.wikia.nocookie.net/__cb20120819074606/secretlife/images/8/80/Kathy123.jpg"},
+                        {"name":"Betty","id":5,"photo":"http://barbieplanet.ru/wp-content/uploads/2011/03/betty-teen-original2.jpg"}
+                    ]
                 }
             }
 
