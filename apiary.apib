@@ -240,12 +240,14 @@ Retrieve an array of reports for a particular date
             ]
 
 
-## Reports by child [/api/v1.0/reports/child_id/{child_id}]
+## Reports by child [/api/v1.0/reports/child_id/{child_id}{?limit}{?offset}]
 
 Resource representing an array of reports for a particular child.
 
 + Parameters
     + child_id: 3 (number, required) - Child ID to get the reports for
+    + limit: 10 (number, optional) - Limit of reports returned
+    + offset: 10 (number, optional) - Offset of records (we assume sorted by date descending)
     
 + Attributes (array[Report Extended])
 
