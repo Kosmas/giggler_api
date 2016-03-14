@@ -34,6 +34,7 @@ Childcare application API calls.
 + name: Kathy (string, required) - Name of the child
 + id: 4 (number, required) - ID of the child
 + photo: http://images3.wikia.nocookie.net/__cb20120819074606/secretlife/images/8/80/Kathy123.jpg (string, required) - Photo URL
++ age: 7 (number, required) - Age of the child
 
 ## Sleep
 
@@ -83,15 +84,15 @@ You must provide the `Authorization: Bearer {access_token}` header in all other 
                 "expires_in":7776000,
                 "avatar": "http://images.clipartpanda.com/woman-clip-art-royalty-free-woman-clipart-illustration-92299.jpg",
                 "children":[
-                    {"name":"Kathy","id":4,"photo":"http://images3.wikia.nocookie.net/__cb20120819074606/secretlife/images/8/80/Kathy123.jpg"},
-                    {"name":"Betty","id":5,"photo":"http://barbieplanet.ru/wp-content/uploads/2011/03/betty-teen-original2.jpg"}
+                    {"name":"Kathy","id":4,"photo":"http://images3.wikia.nocookie.net/__cb20120819074606/secretlife/images/8/80/Kathy123.jpg","age": 7},
+                    {"name":"Betty","id":5,"photo":"http://barbieplanet.ru/wp-content/uploads/2011/03/betty-teen-original2.jpg","age": 6}
                 ],
                 "group":{
                     "name":"Honey bees",
                     "id":38,
                     "children": [
-                        {"name":"Kathy","id":4,"photo":"http://images3.wikia.nocookie.net/__cb20120819074606/secretlife/images/8/80/Kathy123.jpg"},
-                        {"name":"Betty","id":5,"photo":"http://barbieplanet.ru/wp-content/uploads/2011/03/betty-teen-original2.jpg"}
+                        {"name":"Kathy","id":4,"photo":"http://images3.wikia.nocookie.net/__cb20120819074606/secretlife/images/8/80/Kathy123.jpg","age": 7},
+                        {"name":"Betty","id":5,"photo":"http://barbieplanet.ru/wp-content/uploads/2011/03/betty-teen-original2.jpg","age": 6}
                     ]
                 }
             }
@@ -138,7 +139,7 @@ Resource representing one child report.
 
 + Parameters
     + child_id:  4 (number, required) - child id for the report
-    + date: 2015-03-04 (string, required) - date of the report to get
+    + date: 20150324 (string, required) - date of the report to get
 
 + Attributes (Report Extended)
 
@@ -182,12 +183,12 @@ Update data of a particular report
 + Response 204 (application/json)
 
 
-## Reports [/api/v1.0/reports/date/{date}]
+## Reports by date [/api/v1.0/reports/date/{date}]
 
 Resource representing an array of reports.
 
 + Parameters
-    + date: 2015-03-04 (string, required) - date of the report to get
+    + date: 20150324 (string, required) - date of the report to get
     
 + Attributes (array[Report Extended])
 
@@ -225,6 +226,63 @@ Retrieve an array of reports for a particular date
                     "child_id":5,
                     "user_id":3,
                     "day":"20160226",
+                    "mood":"Sad",
+                    "food":[
+                        {"name":"Fresh banana","amount":1,"unit":"portions","time":"morning"},
+                        {"name":"Botifarra de pages","amount":1,"unit":"portions","time":"lunch"},
+                        {"name":"Apple","amount":5,"unit":"portions","time":"afternoon"}
+                    ],
+                    "sleep":[{"start_time":"11:30","end_time":"12:30"}],
+                    "nappy":{"nappies":2,"poos":1,"notes":"Basic poo note."},
+                    "milestone":"","notes":"",
+                    "published": false
+                }
+            ]
+
+
+## Reports by child [/api/v1.0/reports/child_id/{child_id}]
+
+Resource representing an array of reports for a particular child.
+
++ Parameters
+    + child_id: 3 (number, required) - Child ID to get the reports for
+    
++ Attributes (array[Report Extended])
+
+### Retrieve [GET]
+
+Retrieve an array of reports for a particular child
+
++ Request
+    + Headers
+    
+            Authorization: Bearer {access_token}
+
++ Response 200 (application/json)
+    + Body
+    
+            [
+                {
+                    "id":1,
+                    "child_id":4,
+                    "user_id":3,
+                    "day":"20160226",
+                    "mood":"Happy",
+                    "food":[
+                        {"name":"Fresh banana","amount":2,"unit":"portions","time":"morning"},
+                        {"name":"Botifarra de pages","amount":2,"unit":"portions","time":"lunch"},
+                        {"name":"Apple","amount":2,"unit":"portions","time":"afternoon"}
+                    ],
+                    "sleep":[{"start_time":"11:30","end_time":"12:00"}],
+                    "nappy":{"nappies":3,"poos":2,"notes":"Some poo notes, every parent loves those."},
+                    "milestone":"I said my first word today: Mama","notes":"Some notes",
+                    "published": true
+                },
+                {
+                    "id":1,
+                    "child_id":4,
+                    "user_id":3,
+                    "day":"20160225",
                     "mood":"Sad",
                     "food":[
                         {"name":"Fresh banana","amount":1,"unit":"portions","time":"morning"},
