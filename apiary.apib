@@ -192,6 +192,7 @@ Resource representing an array of reports.
     
 + Attributes (array[Report Extended])
 
+
 ### Retrieve [GET]
 
 Retrieve an array of reports for a particular date
@@ -238,6 +239,17 @@ Retrieve an array of reports for a particular date
                     "published": false
                 }
             ]
+
+### Update [POST]
+
+Mass create reports for a particular day optionally seeded with Food data.
+
++ Attributes (Report Base)
+
++ Request (application/json)
+
++ Response 204 (application/json)
+
 
 
 ## Reports by child [/api/v1.0/reports/child_id/{child_id}{?limit}{?offset}]
@@ -297,17 +309,6 @@ Retrieve an array of reports for a particular child
                     "published": false
                 }
             ]
-
-### Update [POST]
-
-Mass create reports for a particular day optionally seeded with Food data.
-
-+ Attributes (Report Base)
-
-+ Request (application/json)
-
-+ Response 204 (application/json)
-
 
 
 # Group Posts
