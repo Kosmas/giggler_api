@@ -57,7 +57,7 @@ Childcare application API calls.
 
 # Group Authentication
 
-## Sign In [/api/v1.0/sign_in/]
+## Sign In [/api/v1/sign_in/]
 
 ### Sign in [POST]
 
@@ -98,7 +98,7 @@ You must provide the `Authorization: Bearer {access_token}` header in all other 
             }
 
 
-## Sign out [/api/v1.0/sign_out]
+## Sign out [/api/v1/sign_out]
 
 ### Sign out [DELETE]
 
@@ -110,7 +110,7 @@ You must provide the `Authorization: Bearer {access_token}` header in all other 
 
 + Response 204
 
-## Forgot Password [/api/v1.0/forgot_password/]
+## Forgot Password [/api/v1/forgot_password/]
 
 ### Forgot password [POST]
 
@@ -133,7 +133,7 @@ fogotten their password.
 
 # Group Reports
 
-## Report [/api/v1.0/reports/date/{date}/child/{child_id}]
+## Report [/api/v1/reports/date/{date}/child/{child_id}]
 
 Resource representing one child report.
 
@@ -183,7 +183,7 @@ Update data of a particular report
 + Response 204 (application/json)
 
 
-## Reports by date [/api/v1.0/reports/date/{date}]
+## Reports by date [/api/v1/reports/date/{date}]
 
 Resource representing an array of reports.
 
@@ -252,7 +252,7 @@ Mass create reports for a particular day optionally seeded with Food data.
 
 
 
-## Reports by child [/api/v1.0/reports/child_id/{child_id}{?limit}{?offset}]
+## Reports by child [/api/v1/reports/child_id/{child_id}{?limit}{?offset}]
 
 Resource representing an array of reports for a particular child.
 
@@ -313,7 +313,7 @@ Retrieve an array of reports for a particular child
 
 # Group Posts
 
-## Posts by child [/api/v1.0/child/{child_id}/posts]
+## Posts by child [/api/v1/child/{child_id}/posts]
 
 Resource representing all posts for a child
 
@@ -418,7 +418,7 @@ Retrieves all posts for a child
             ]
 
 
-### Post [/api/v1.0/child/{child_id}/posts/{post_id}]
+### Post [/api/v1/child/{child_id}/posts/{post_id}]
 
 Resource representing a post.
 
@@ -491,7 +491,7 @@ Adds a new post.
 
 # Group Comments
 
-### Comments [/api/v1.0/child/{child_id}/posts/{post_id}/comments]
+### Comments [/api/v1/child/{child_id}/posts/{post_id}/comments]
 
 Resource representing all comments for a post
 
@@ -518,7 +518,7 @@ Retrieves all comments for a post
 
     + Attributes (Comments)
 
-### Comment [/api/v1.0/child/{child_id}/posts/{post_id}/comments/{comment_id}]
+### Comment [/api/v1/child/{child_id}/posts/{post_id}/comments/{comment_id}]
 
 Resource representing a post comment.
 
@@ -589,7 +589,7 @@ Adds a new comment.
             
 + Response 204
 
-### Post Likes [/api/v1.0/child/{child_id}/posts/{post_id}/likes]
+### Post Likes [/api/v1/child/{child_id}/posts/{post_id}/likes]
 
 Resource representing all likes for a post
 
@@ -616,7 +616,7 @@ Retrieves all likes for a post
 
     + Attributes (Post Likes)
 
-### Post Like [/api/v1.0/child/{child_id}/posts/{post_id}/likes/{like_id}]
+### Post Like [/api/v1/child/{child_id}/posts/{post_id}/likes/{like_id}]
 
 Resource representing a post like.
 
@@ -659,7 +659,7 @@ Unlikes a post.
             
 + Response 204
 
-### Comment Likes [/api/v1.0/child/{child_id}/posts/{post_id}/comments/{comment_id}/likes]
+### Comment Likes [/api/v1/child/{child_id}/posts/{post_id}/comments/{comment_id}/likes]
 
 Resource representing all likes for a comment
 
@@ -688,7 +688,7 @@ Retrieves all likes for a comment
 
     + Attributes (Comment Likes)
 
-### Comment Like [/api/v1.0/child/{child_id}/posts/{post_id}/comments/{comment_id}/likes/{like_id}]
+### Comment Like [/api/v1/child/{child_id}/posts/{post_id}/comments/{comment_id}/likes/{like_id}]
 
 Resource representing a comment like.
 
@@ -733,7 +733,7 @@ Unlikes a comment.
             
 + Response 204
 
-### User [/api/v1.0/users/{user_id}]
+### User [/api/v1/users/{user_id}]
 
 Resource representing user
 
@@ -746,13 +746,13 @@ Resource representing user
     + last_name - Smith - (string, required) - The last name for the user
     + user_type - Staff - (enum, required) - The type of the user
 
-### Users [/api/v1.0/users]
+### Users [/api/v1/users]
 
 Resource representing all users
 
 + Attributes (array[User])
 
-### Search Users [/api/v1.0/search/users/{user_name}]
+### Search Users [/api/v1/search/users/{user_name}]
 
 Search users
 
@@ -775,7 +775,7 @@ List users
     
     + Attributes(Users)
 
-### Search Posts [/api/v1.0/search/child_id/{child_id}/posts/{post_keyword}]
+### Search Posts [/api/v1/search/child_id/{child_id}/posts/{post_keyword}]
 
 Search posts
 
@@ -795,7 +795,7 @@ Search posts
     
     + Attributes (Posts)
 
-### Search Reports [/api/v1.0/search/{child_id}/reports/{report_date}]
+### Search Reports [/api/v1/search/{child_id}/reports/{report_date}]
 
 Search reports for specific date
 
@@ -820,7 +820,7 @@ Find report for a specific date
 
         Not found
 
-## General Settings [/api/v1.0/settings/{id}/general_settings]
+## General Settings [/api/v1/settings/{id}/general_settings]
 
 + Parameters
 
@@ -842,7 +842,7 @@ Find report for a specific date
                 "push_notification": true
             }
 
-## Language Settings [/api/v1.0/settings/{id}/language_setting]
+## Language Settings [/api/v1/settings/{id}/language_setting]
 
 + Parameters
 
@@ -873,7 +873,7 @@ Find report for a specific date
 
 + Response 204
 
-## Push Notification Settings [/api/v1.0/settings/{id}/push_notification_setting]
+## Push Notification Settings [/api/v1/settings/{id}/push_notification_setting]
 
 + Parameters
 
