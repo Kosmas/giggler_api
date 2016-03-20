@@ -417,6 +417,19 @@ Retrieves all posts for a child
                 }
             ]
 
+#### Create a new post [POST]
+
+Adds a new post.
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer {access_token}
+            
+    + Attributes (Post)
+    
++ Response 204
+
 
 ### Post [/api/v1/child/{child_id}/posts/{post_id}]
 
@@ -494,21 +507,6 @@ Retrieves an individual post.
                     }
                 ]
             }
-
-
-#### Create a new post [POST]
-
-Adds a new post.
-
-+ Request (application/json)
-    + Headers
-
-            Authorization: Bearer {access_token}
-            
-    + Attributes (Post)
-    
-+ Response 204
-
 
 # Group Comments
 
