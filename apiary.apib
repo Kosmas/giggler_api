@@ -313,7 +313,7 @@ Retrieve an array of reports for a particular child
 
 # Group Posts
 
-## Posts by child [/api/v1/child/{child_id}/posts]
+## Posts by child [/api/v1/child/{child_id}/posts{?limit}{?offset}]
 
 Resource representing all posts for a child
 
@@ -444,24 +444,57 @@ Retrieves an individual post.
             Authorization: Bearer {access_token}
             
 + Response 200 (application/json)
-    + Attributes (Post)
+    + Body
 
-#### Update own post [PUT]
+            {
+                "id":"36",
+                "child_id":"5",
+                "post_text":"Nicole is speaking all the time, she learned so many new words!",
+                "created_at":"20151020114534",
+                "author": {
+                    "user_id": 19,
+                    "user_name": "Andrea Smith",
+                    "user_photo": "http://images.clipartpanda.com/woman-clip-art-royalty-free-woman-clipart-illustration-92299.jpg"
+                },
+                "images": [
+                    {
+                        "thumb_url": "http://2.bp.blogspot.com/__6wprg8P2_k/TJle8PAOiTI/AAAAAAAAAKA/NW3YJBPVphM/s1600/young+kids+playing.jpg",
+                        "fullsize_url": "https://southwestcommunitycenter.files.wordpress.com/2011/02/kids-playing.jpg"
+                    },
+                    {
+                        "thumb_url": "http://2.bp.blogspot.com/__6wprg8P2_k/TJle8PAOiTI/AAAAAAAAAKA/NW3YJBPVphM/s1600/young+kids+playing.jpg",
+                        "fullsize_url": "https://southwestcommunitycenter.files.wordpress.com/2011/02/kids-playing.jpg"
+                    }
+                ],
+                "likes_count": 4,
+                "liked_by_user": true,
+                "comments_count": 3,
+                "comments": [
+                    { 
+                        "id":5,
+                        "author": {
+                            "user_id": 21,
+                            "user_name": "Mum",
+                            "user_photo": "http://images.clipartpanda.com/woman-clip-art-royalty-free-woman-clipart-illustration-92299.jpg"
+                        },
+                        "likes_count": 3,
+                        "text": "I'm so happy to hear that",
+                        "created_at":"20151020115534"
+                    },
+                    { 
+                        "id":6,
+                        "author": {
+                            "user_id": 21,
+                            "user_name": "Dad",
+                            "user_photo": "http://images.clipartpanda.com/woman-clip-art-royalty-free-woman-clipart-illustration-92299.jpg"
+                        },
+                        "likes_count": 3,
+                        "text": "She also knows all the children in the group by name!",
+                        "created_at":"20151020123534"
+                    }
+                ]
+            }
 
-Updates own post.
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer {access_token}
-    
-    + Attributes (Post)
-
-+ Response 204 (application/json)
-
-    Post updated
-    
-    + Attributes (Post)
 
 #### Create a new post [POST]
 
@@ -474,49 +507,10 @@ Adds a new post.
             
     + Attributes (Post)
     
-+ Response 201 (application/json)
-
-    Post created.
-    
-    + Attributes (Post)
-
-#### Delete my post [DELETE]
-
-+ Request
-    + Headers
-
-            Authorization: Bearer {access_token}
-
 + Response 204
 
+
 # Group Comments
-
-### Comments [/api/v1/child/{child_id}/posts/{post_id}/comments]
-
-Resource representing all comments for a post
-
-+ Parameters
-    + child_id: 33 - (number, required) - ID for the child
-    + post_id: 12 - (number, required) - ID for the post
-
-+ Attributes (array[Comment])
-
-#### List all comments for a post [GET]
-
-Retrieves all comments for a post
-
-+ Parameters
-    + child_id: 41 - (number, required) - ID for the child
-    + post_id: 111 - (number, required) - ID for the post
-
-+ Request
-    + Headers
-    
-            Authorization: Bearer {access_token}
-
-+ Response 200 (application/json)
-
-    + Attributes (Comments)
 
 ### Comment [/api/v1/child/{child_id}/posts/{post_id}/comments/{comment_id}]
 
@@ -534,34 +528,6 @@ Resource representing a post comment.
     + text: This is a message - (string, required) - message text
     + created_at: 20160215102334 - (string, required) - message created date
 
-#### Retrieve comment [GET]
-
-Retrieves an individual comment.
-
-+ Request
-    + Headers
-
-            Authorization: Bearer {access_token}
-
-+ Response 200 (application/json)
-    + Attributes (Comment)
-
-#### Update own comment [PUT]
-
-Updates own comment.
-
-+ Request (application/json)
-    + Headers
-    
-            Authorization: Bearer {access_token}
-    
-    + Attributes (Comment)
-    
-+ Response 204 (application/json)
-
-    Comment updated
-    
-    + Attributes (Comment)
 
 #### Add new comment [POST]
 
@@ -574,47 +540,10 @@ Adds a new comment.
     
     + Attributes (Comment)
 
-+ Response 201 (application/json)
-
-    Comment created.
-    
-    + Attributes (Comment)
-
-#### Delete my comment [DELETE]
-
-+ Request
-    + Headers
-    
-            Authorization: Bearer {access_token}
-            
 + Response 204
 
-### Post Likes [/api/v1/child/{child_id}/posts/{post_id}/likes]
 
-Resource representing all likes for a post
-
-+ Parameters
-    + child_id: 15 - (number, required) - ID for the child
-    + post_id: 4 - (number, required) - ID for the post
-
-+ Attributes (array[Post Like])
-
-#### List all likes for a post [GET]
-
-Retrieves all likes for a post
-
-+ Parameters
-    + child_id: 41 - (number, required) - ID for the child
-    + post_id: 111 - (number, required) - ID for the post
-
-+ Request
-    + Headers
-    
-            Authorization: Bearer {access_token}
-
-+ Response 200 (application/json)
-
-    + Attributes (Post Likes)
+# Group Like
 
 ### Post Like [/api/v1/child/{child_id}/posts/{post_id}/likes/{like_id}]
 
@@ -642,11 +571,8 @@ Likes a post.
     
     + Attributes (Post Like)
 
-+ Response 201 (application/json)
++ Response 204
 
-    Comment created.
-    
-    + Attributes (Post Like)
 
 #### Unlike a post [DELETE]
 
@@ -659,34 +585,6 @@ Unlikes a post.
             
 + Response 204
 
-### Comment Likes [/api/v1/child/{child_id}/posts/{post_id}/comments/{comment_id}/likes]
-
-Resource representing all likes for a comment
-
-+ Parameters
-    + child_id: 55 - (number, required) - ID for the child
-    + post_id: 114 - (number, required) - ID for the post
-    + comment_id: 1 - (number, required) - ID for the post
-
-+ Attributes (array[Comment Like])
-
-#### List all likes for a comment [GET]
-
-Retrieves all likes for a comment
-
-+ Parameters
-    + child_id: 41 - (number, required) - ID for the child
-    + post_id: 111 - (number, required) - ID for the post
-    + comment_id: 33 - (number, required) - ID for the comment
-
-+ Request
-    + Headers
-    
-            Authorization: Bearer {access_token}
-
-+ Response 200 (application/json)
-
-    + Attributes (Comment Likes)
 
 ### Comment Like [/api/v1/child/{child_id}/posts/{post_id}/comments/{comment_id}/likes/{like_id}]
 
@@ -733,6 +631,8 @@ Unlikes a comment.
             
 + Response 204
 
+# Group User
+
 ### User [/api/v1/users/{user_id}]
 
 Resource representing user
@@ -751,6 +651,8 @@ Resource representing user
 Resource representing all users
 
 + Attributes (array[User])
+
+# Group Search
 
 ### Search Users [/api/v1/search/users/{user_name}]
 
