@@ -494,6 +494,16 @@ Retrieves an individual post.
                         "text": "I'm so happy to hear that",
                         "created_at":"20151020115534",
                         "liked_by_user": false,
+                        "images": [
+                            {
+                                "thumb_url": "http://2.bp.blogspot.com/__6wprg8P2_k/TJle8PAOiTI/AAAAAAAAAKA/NW3YJBPVphM/s1600/young+kids+playing.jpg",
+                                "fullsize_url": "https://southwestcommunitycenter.files.wordpress.com/2011/02/kids-playing.jpg"
+                            },
+                            {
+                                "thumb_url": "http://2.bp.blogspot.com/__6wprg8P2_k/TJle8PAOiTI/AAAAAAAAAKA/NW3YJBPVphM/s1600/young+kids+playing.jpg",
+                                "fullsize_url": "https://southwestcommunitycenter.files.wordpress.com/2011/02/kids-playing.jpg"
+                            }
+                        ]
                     },
                     { 
                         "id":6,
@@ -512,22 +522,17 @@ Retrieves an individual post.
 
 # Group Comments
 
-### Comment [/api/v1/child/{child_id}/posts/{post_id}/comments/{comment_id}]
+### Comment [/api/v1/child/{child_id}/posts/{post_id}/comments]
 
 Resource representing a post comment.
 
 + Parameters
     + child_id: 5 - (number, required) - ID for the child
     + post_id: 2 - (number, required) - ID for the post
-    + comment_id: 13 - (number, required) - ID for the comment
 
 + Attributes
-    + id: 123 - (number, required) - ID for the comment
-    + post_id: 45 - (number, required) - ID for the post
-    + user_id: 33 - (number, required) - ID for the user
     + text: This is a message - (string, required) - message text
-    + created_at: 20160215102334 - (string, required) - message created date
-
+    + images (array[string]) - array of images
 
 #### Add new comment [POST]
 
@@ -545,20 +550,13 @@ Adds a new comment.
 
 # Group Like
 
-### Post Like [/api/v1/child/{child_id}/posts/{post_id}/likes/{like_id}]
+### Post Like [/api/v1/posts/{post_id}/likes]
 
 Resource representing a post like.
 
 + Parameters
-    + child_id: 6 - (number, required) - ID for the child
     + post_id: 55 - (number, required) - ID for the post
-    + like_id: 22 - (number, required) - ID for the like
 
-+ Attributes
-    + id: 43 - (number, required) - ID for the like
-    + post_id: 33 - (number, required) - ID for the post
-    + user_id: 11 - (number, required) - ID for the user
-    + created_at: 20151110083456 - (string, required) - like created datetime
 
 #### Like a post [POST]
 
@@ -569,8 +567,6 @@ Likes a post.
     
             Authorization: Bearer {access_token}
     
-    + Attributes (Post Like)
-
 + Response 204
 
 
@@ -586,22 +582,12 @@ Unlikes a post.
 + Response 204
 
 
-### Comment Like [/api/v1/child/{child_id}/posts/{post_id}/comments/{comment_id}/likes/{like_id}]
+### Comment Like [/api/v1/comments/{comment_id}/likes]
 
 Resource representing a comment like.
 
 + Parameters
-    + child_id: 6 - (number, required) - ID for the child
-    + post_id: 55 - (number, required) - ID for the post
     + comment_id: 87 - (number, required) - ID for the comment
-    + like_id: 22 - (number, required) - ID for the like
-
-+ Attributes
-    + id: 43 - (number, required) - ID for the like
-    + post_id: 33 - (number, required) - ID for the post
-    + comment_id: 44 - (number, required) - ID for the comment
-    + user_id: 11 - (number, required) - ID for the user
-    + created_at: 20151110083456 - (string, required) - like created datetime
 
 #### Like a comment [POST]
 
@@ -612,13 +598,8 @@ Likes a comment.
     
             Authorization: Bearer {access_token}
     
-    + Attributes (Comment Like)
++ Response 204
 
-+ Response 201 (application/json)
-
-    Comment like created.
-    
-    + Attributes (Comment Like)
 
 #### Unlike a comment [DELETE]
 
@@ -630,6 +611,7 @@ Unlikes a comment.
             Authorization: Bearer {access_token}
             
 + Response 204
+
 
 # Group User
 
