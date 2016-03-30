@@ -252,7 +252,7 @@ Mass create reports for a particular day optionally seeded with Food data.
 
 
 
-## Reports by child [/api/v1/reports/child_id/{child_id}{?limit}{?offset}]
+## Reports by child [/api/v1/reports/child/{child_id}{?limit}{?offset}]
 
 Resource representing an array of reports for a particular child.
 
@@ -431,12 +431,141 @@ Adds a new post.
 + Response 204
 
 
-### Post [/api/v1/child/{child_id}/posts/{post_id}]
+## Posts by group [/api/v1/group/posts{?limit}{?offset}]
+
+Resource representing all posts for a child
+
+
++ Attributes (array[Post])
+
+#### List all posts for a group [GET]
+
+Retrieves all posts for a group
+
++ Parameters
+    + limit: 10 (number, optional) - number of records to return
+    + offset: 10 (number, optional) - offset of records to return
+
++ Request
+    + Headers
+
+            Authorization: Bearer {access_token}
+
++ Response 200 (application/json)
+    + Body
+        
+            [
+                {
+                    "id":34,
+                    "child_id":5,
+                    "post_text":"Nicole is paying with Tom in the park, they're both having so much fun!",
+                    "created_at":"20151023114534",
+                    "author": {
+                        "user_id": 19,
+                        "user_name": "Nadine Taylor",
+                        "user_photo": "http://images.clipartpanda.com/woman-clip-art-royalty-free-woman-clipart-illustration-92299.jpg"
+                    },
+                    "images": [
+                        {
+                            "thumb_url": "http://2.bp.blogspot.com/__6wprg8P2_k/TJle8PAOiTI/AAAAAAAAAKA/NW3YJBPVphM/s1600/young+kids+playing.jpg",
+                            "fullsize_url": "https://southwestcommunitycenter.files.wordpress.com/2011/02/kids-playing.jpg"
+                        },
+                        {
+                            "thumb_url": "http://2.bp.blogspot.com/__6wprg8P2_k/TJle8PAOiTI/AAAAAAAAAKA/NW3YJBPVphM/s1600/young+kids+playing.jpg",
+                            "fullsize_url": "https://southwestcommunitycenter.files.wordpress.com/2011/02/kids-playing.jpg"
+                        },
+                        {
+                            "thumb_url": "http://2.bp.blogspot.com/__6wprg8P2_k/TJle8PAOiTI/AAAAAAAAAKA/NW3YJBPVphM/s1600/young+kids+playing.jpg",
+                            "fullsize_url": "https://southwestcommunitycenter.files.wordpress.com/2011/02/kids-playing.jpg"
+                        },
+                        {
+                            "thumb_url": "http://2.bp.blogspot.com/__6wprg8P2_k/TJle8PAOiTI/AAAAAAAAAKA/NW3YJBPVphM/s1600/young+kids+playing.jpg",
+                            "fullsize_url": "https://southwestcommunitycenter.files.wordpress.com/2011/02/kids-playing.jpg"
+                        },
+                        {
+                            "thumb_url": "http://2.bp.blogspot.com/__6wprg8P2_k/TJle8PAOiTI/AAAAAAAAAKA/NW3YJBPVphM/s1600/young+kids+playing.jpg",
+                            "fullsize_url": "https://southwestcommunitycenter.files.wordpress.com/2011/02/kids-playing.jpg"
+                        }
+                    ],
+                    "likes_count": 3,
+                    "liked_by_user": true,
+                    "comments_count": 2,
+                },
+                {
+                    "id":35,
+                    "group_id":12
+                    "post_text":"We'll preparing to sing some songs now! With the whole group!",
+                    "created_at":"20151023104534",
+                    "author": {
+                        "user_id": 20,
+                        "user_name": "Andrea Smith",
+                        "user_photo": "http://images.clipartpanda.com/woman-clip-art-royalty-free-woman-clipart-illustration-92299.jpg"
+                    },
+                    "images": [],
+                    "likes_count": 2,
+                    "liked_by_user": false,
+                    "comments_count": 1,
+                },
+                {
+                    "id":35,
+                    "child_id":5,
+                    "post_text":"Nicole has a lovely voice, she's singing now!",
+                    "created_at":"20151023104534",
+                    "author": {
+                        "user_id": 20,
+                        "user_name": "Andrea Smith",
+                        "user_photo": "http://images.clipartpanda.com/woman-clip-art-royalty-free-woman-clipart-illustration-92299.jpg"
+                    },
+                    "images": [],
+                    "likes_count": 2,
+                    "liked_by_user": false,
+                    "comments_count": 1,
+                },
+                {
+                    "id":36,
+                    "child_id":5,
+                    "post_text":"Nicole is speaking all the time! She learned so many new words.",
+                    "created_at":"20151020114534",
+                    "author": {
+                        "user_id": 19,
+                        "user_name": "Andrea Smith",
+                        "user_photo": "http://images.clipartpanda.com/woman-clip-art-royalty-free-woman-clipart-illustration-92299.jpg"
+                    },
+                    "images": [
+                        {
+                            "thumb_url": "http://2.bp.blogspot.com/__6wprg8P2_k/TJle8PAOiTI/AAAAAAAAAKA/NW3YJBPVphM/s1600/young+kids+playing.jpg",
+                            "fullsize_url": "https://southwestcommunitycenter.files.wordpress.com/2011/02/kids-playing.jpg"
+                        },
+                        {
+                            "thumb_url": "http://2.bp.blogspot.com/__6wprg8P2_k/TJle8PAOiTI/AAAAAAAAAKA/NW3YJBPVphM/s1600/young+kids+playing.jpg",
+                            "fullsize_url": "https://southwestcommunitycenter.files.wordpress.com/2011/02/kids-playing.jpg"
+                        }
+                    ],
+                    "likes_count": 4,
+                    "liked_by_user": true,
+                    "comments_count": 3,
+                }
+            ]
+
+#### Create a new post [POST]
+
+Adds a new post.
+
++ Request (application/json)
+    + Headers
+
+            Authorization: Bearer {access_token}
+            
+    + Attributes (Post)
+    
++ Response 204
+
+
+### Post [/api/v1/posts/{post_id}]
 
 Resource representing a post.
 
 + Parameters
-    + child_id: 3 - (number, required) - ID for the child
     + post_id: 14 - (number, required) - ID for the post
 
 + Attributes
@@ -523,12 +652,11 @@ Retrieves an individual post.
 
 # Group Comments
 
-### Comment [/api/v1/child/{child_id}/posts/{post_id}/comments]
+### Comment [/api/v1/posts/{post_id}/comments]
 
 Resource representing a post comment.
 
 + Parameters
-    + child_id: 5 - (number, required) - ID for the child
     + post_id: 2 - (number, required) - ID for the post
 
 + Attributes
@@ -660,7 +788,7 @@ List users
     
     + Attributes(Users)
 
-### Search Posts [/api/v1/search/child_id/{child_id}/posts/{post_keyword}]
+### Search Posts [/api/v1/search/child/{child_id}/posts/{post_keyword}]
 
 Search posts
 
